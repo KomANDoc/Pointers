@@ -3,7 +3,7 @@ using namespace std;
 
 void fill(int arr[],int size);
 void print(int* arr, int* size);
-void push_back(int** arr, int* size, int value);
+void push_back(int*& arr, int& size, int value);
 void push_front(int** arr, int* size, int value);
 void insert(int** arr, int* size, int value, int index);
 
@@ -20,7 +20,7 @@ void main()
 
 	cout << "\n\n\n";
 	
-	push_back(&arr, &size, 123);
+	push_back(arr, size, 123);
 	print(arr, &size);
 
 	cout << "\n\n\n";
@@ -58,14 +58,14 @@ void print(int* arr, int* size)
 	cout << endl;
 }
 
-void push_back(int** arr, int* size, int value)//добавляет значение в конец динамического массива
+void push_back(int*& arr, int& size, int value)//добавляет значение в конец динамического массива
 {
-	*size += 1;
-	int* arrBuf = new int[*size]{};
-	for (int i = 0; i < *size; i++)	arrBuf[i] = (*arr)[i];
-	delete[] *arr;
-	*arr = arrBuf;
-	(*arr)[*size - 1] = value;
+	size += 1;
+	int* arrBuf = new int[size]{};
+	for (int i = 0; i < size; i++)	arrBuf[i] = arr[i];
+	delete[] arr;
+	arr = arrBuf;
+	arr[size - 1] = value;
 }
 
 void push_front(int** arr, int* size, int value)//добавляет значение в начало динамического массива
